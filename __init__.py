@@ -25,6 +25,11 @@ class ControlFurby(MycroftSkill):
         self.speak_dialog('more.cowbell')
         subprocess.call(["aplay", "-q", "/home/pi/mycroft-core/skills/control-furby.cdoebler/music/dftr.wav"])
 
+    @intent_file_handler('autumn.adventure.intent')
+    def autumn_adventure(self, message):
+        self.speak_dialog('autumn.adventure')
+        subprocess.call(["aplay", "-q", "/home/pi/mycroft-core/skills/winston-more-cowbell.cdoebler/music/autumn_adventure.mp3"])
+
     def stop(self):
         pass
 
