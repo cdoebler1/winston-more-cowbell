@@ -1,15 +1,19 @@
 from mycroft import MycroftSkill, intent_file_handler
-import subprocess
+from mycroft.skills.audioservice import AudioService
 
 
 class ControlFurby(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
 
+    def initialize(self):
+        self.audio_service = AudioService(self.bus)
+
     @intent_file_handler('autumn.adventure.intent')
     def autumn_adventure(self, message):
         self.speak_dialog('autumn.adventure')
-        subprocess.call(["aplay", "-q", "/home/pi/mycroft-core/skills/winston-more-cowbell.cdoebler1/music/autumn_adventure.mp3"])
+        story = "skills/winston-more-cowbell.cdoebler1/music/autumn_adventure.mp3"
+        self.audio_service.play(story)
 
     def stop(self):
         pass
